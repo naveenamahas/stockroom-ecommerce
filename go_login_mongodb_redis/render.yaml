@@ -15,14 +15,16 @@ services:
       - key: CORS_ORIGINS
         sync: false
 
-  - type: static
+  - type: web
     name: stockroom-shopper
+    runtime: static
     rootDir: frontend/shopper-ui
     buildCommand: echo "Static Shopper UI ready"
     staticPublishPath: .
 
-  - type: static
+  - type: web
     name: stockroom-admin
+    runtime: static
     rootDir: frontend/admin-ui
     buildCommand: echo "Static Admin UI ready"
     staticPublishPath: .
