@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stockroom Admin</title>
+  <link rel="stylesheet" href="style.css?v=2">
+</head>
+<body>
+  <main class="auth-shell">
+    <section class="auth-card">
+      <form id="loginForm" class="auth-panel">
+        <div class="panel-header"><h2>Admin login</h2><p>Sign in to manage your catalog.</p></div>
+        <label class="field"><span>Email</span><input id="email" type="email" required></label>
+        <label class="field"><span>Password</span><input id="password" type="password" required></label>
+        <button class="primary-btn" type="submit">Open inventory</button>
+      </form>
+      <section id="adminPanel" class="auth-panel hidden">
+        <div class="admin-layout">
+          <aside class="admin-sidebar">
+            <div class="sidebar-brand"><span>◆</span> Stockroom</div>
+            <div class="admin-user"><div class="avatar">A</div><div><strong id="accountName"></strong><span>Administrator</span></div></div>
+            <nav class="admin-nav" aria-label="Admin navigation">
+              <button class="admin-nav-link active" type="button" data-view="products">▤ <span>Products</span></button>
+              <button class="admin-nav-link" type="button" data-view="orders">▣ <span>Orders</span></button>
+            </nav>
+            <button id="logoutButton" class="sidebar-logout" type="button">↪ <span>Logout</span></button>
+          </aside>
+          <section class="admin-content">
+            <div id="productsView">
+              <div class="dashboard-topbar"><div><p class="eyebrow">Stockroom / Admin</p><h2>Product inventory</h2><p>Manage products, prices, and available stock.</p></div><button id="refreshProducts" class="secondary-btn small-btn" type="button">Refresh</button></div>
+              <form id="productForm" class="product-form hidden">
+                <input id="productId" type="hidden">
+                <label class="field"><span>Name</span><input id="productName" required></label>
+                <label class="field"><span>Description</span><input id="productDescription"></label>
+                <label class="field"><span>Price</span><input id="productPrice" type="number" min="0" step="0.01" required></label>
+                <label class="field"><span>Quantity</span><input id="productQuantity" type="number" min="0" step="1" required></label>
+                <div class="product-form-actions"><button id="productSubmit" class="primary-btn" type="submit">Add product</button><button id="productCancel" class="secondary-btn hidden" type="button">Cancel</button></div>
+              </form>
+              <div class="catalog-heading"><h3>Product catalog</h3><button id="openProductForm" class="primary-btn small-btn" type="button">Add product</button></div>
+              <div id="productList" class="product-list"></div>
+            </div>
+            <div id="ordersView" class="hidden">
+              <div class="dashboard-topbar"><div><p class="eyebrow">Stockroom / Admin</p><h2>Orders</h2><p>Review customer purchases and payment status.</p></div><button id="refreshOrders" class="secondary-btn small-btn" type="button">Refresh</button></div>
+              <div id="orderList" class="orders-list"></div>
+            </div>
+          </section>
+        </div>
+      </section>
+      <p id="message" class="msg" aria-live="polite"></p>
+    </section>
+  </main>
+  <script>window.__API_URL__ = window.location.hostname === "localhost" ? "http://localhost:8080/api" : "https://stockroom-api.onrender.com/api";</script>
+  <script src="app.js?v=2"></script>
+</body>
+</html>

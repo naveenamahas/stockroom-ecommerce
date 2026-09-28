@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: stockroom-api
+    runtime: go
+    rootDir: backend
+    buildCommand: go build -o stockroom-api .
+    startCommand: ./stockroom-api
+    envVars:
+      - key: MONGO_URI
+        sync: false
+      - key: MONGO_DB
+        value: loginapp
+      - key: REDIS_ADDR
+        sync: false
+      - key: CORS_ORIGINS
+        sync: false
+
+  - type: static
+    name: stockroom-shopper
+    rootDir: frontend/shopper-ui
+    buildCommand: echo "Static Shopper UI ready"
+    staticPublishPath: .
+
+  - type: static
+    name: stockroom-admin
+    rootDir: frontend/admin-ui
+    buildCommand: echo "Static Admin UI ready"
+    staticPublishPath: .
